@@ -7,7 +7,23 @@ if (empty($_SESSION['username'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <?php include "head.php"; ?>
+  <?php include "head.php"; 
+
+$query_pelajaran = mysql_query("SELECT * FROM pelajaran order by kode_pelajaran desc")or die(mysql_error());
+$row_pelajaran = mysql_fetch_array($query_pelajaran);
+$totalrow_pelajaran = mysql_num_rows($query_pelajaran);
+
+if ($totalrow_pelajaran > 0) {
+  $kodepelajaran_terakhir = substr($row_pelajaran['kode_pelajaran'], -2);
+  $nourut = $kodepelajaran_terakhir+1;
+  $isikodepelajaran ="P"."00".$nourut;
+  }else if ($totalrow_pelajaran ==0){
+  $nourut = 1;
+  $isikodepelajaran ="P"."00".$nourut;
+  
+  }
+
+  ?>
 
   <body>
 
@@ -74,7 +90,7 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Kode Pelajaran</label>
                               <div class="col-sm-10">
-                                  <input name="kode_pelajaran" type="text" id="kode_pelajaran" class="form-control" placeholder="Isi dengan ex : P001 dst." autofocus="on" />
+                                  <input name="kode_pelajaran" type="text" id="kode_pelajaran" class="form-control" placeholder="Isi dengan ex : P001 dst." autofocus="on" value="<?php echo $isikodepelajaran;?> " readonly/>
                               </div>
                           </div>
                           <div class="form-group">

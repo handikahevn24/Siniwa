@@ -79,7 +79,7 @@ $_SESSION['start_time'] = time();
                                     $eskiel = mysql_query("SELECT * FROM kelas ORDER BY kode_kelas ASC");
                                     if(mysql_num_rows($eskiel) != 0){
                                     while($dataku = mysql_fetch_assoc($eskiel)){
-                                    echo '<option value='.$dataku['kode_kelas'].'>'.$dataku['nama_kelas'].'</option>'; }
+                                    echo '<option value='.$dataku['kode_kelas'].'>'.$dataku['kelas'].' '.$dataku['nama_kelas'].'</option>'; }
                                     }
                                     ?>
                                   </select>

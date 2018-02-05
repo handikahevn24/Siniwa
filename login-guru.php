@@ -38,9 +38,9 @@
 		        <h2 class="form-login-heading"> <span class="glyphicon glyphicon-lock"></span> LOGIN GURU</h2>
                 <center><h5> <span class="glyphicon glyphicon-qrcode"></span> Sistem Informasi Nilai Siswa (SINIWA) <span class="glyphicon glyphicon-qrcode"></span></h5></center>
 		        <div class="login-wrap">
-		            <input name="username" id="username" type="input" class="form-control" autocomplete="off" placeholder="Username" required  autofocus>
+		            <input name="username" id="username" type="input" class="form-control" autocomplete="off" placeholder="Username Guru" required  autofocus>
                     <br />
-                    <input name="password" id="password" type="password" class="form-control" autocomplete="off" placeholder="Password" required>
+                    <input name="password" id="password" type="password" class="form-control" autocomplete="off" placeholder="Password Guru" required>
                     <br />
                     <button class="btn btn-lg btn-info btn-block" type="submit">Sign in</button>
 		           
@@ -95,7 +95,7 @@
     <script type="text/javascript" src="admin/assets/js/jquery.backstretch.min.js"></script>
     <!-- Pemanggilan Background Login Form-->
     <script>
-        $.backstretch("foto/3.jpg", {speed: 500});
+        $.backstretch("bgguru.jpg", {speed: 500});
     </script>
 
 

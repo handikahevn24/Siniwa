@@ -87,7 +87,6 @@ $_SESSION['start_time'] = time();
        <th>Kelamin </th>
        <th>Alamat </th>
        <th>No Telepon </th>
-       <th>Status </th>
        <th>Tools</th>
 	  
       </tr>

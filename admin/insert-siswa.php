@@ -18,16 +18,23 @@ if (!empty($_FILES["nama_file"]["tmp_name"]))
         $alamat=$_POST['alamat'];
         $no_telepon=$_POST['no_telepon'];
         $tahun_angkatan=$_POST['tahun_angkatan'];
-        $status=$_POST['status'];
         $username=$_POST['username'];
         $password=$_POST['password'];
+
+
+    $ceknis = mysql_query("SELECT * FROM siswa where nis=$nis")or die(mysql_error());
+    if (mysql_num_rows($ceknis)>=1) {
+        echo "<script>alert('Nis tersebut sudah digunakan'); window.location = 'input-siswa.php' </script>";
+        die();
+    }
+
 		
 	if($jenis_gambar=="image/jpeg" || $jenis_gambar=="image/jpg" || $jenis_gambar=="image/gif" || $jenis_gambar=="image/x-png")
 	{			
 		$gambar = $namafolder . basename($_FILES['nama_file']['name']);		
 		if (move_uploaded_file($_FILES['nama_file']['tmp_name'], $gambar)) {
-			$sql="INSERT INTO siswa(kode_siswa,nis,nama_siswa,kelamin,agama,tempat_lahir,tanggal_lahir,alamat,no_telepon,tahun_angkatan,status,username,password,gambar) VALUES
-            ('$kode_siswa','$nis','$nama_siswa','$kelamin','$agama','$tempat_lahir','$tanggal_lahir','$alamat','$no_telepon','$tahun_angkatan','$status','$username','$password','$gambar')";
+			$sql="INSERT INTO siswa(kode_siswa,nis,nama_siswa,kelamin,agama,tempat_lahir,tanggal_lahir,alamat,no_telepon,tahun_angkatan,username,password,gambar) VALUES
+            ('$kode_siswa','$nis','$nama_siswa','$kelamin','$agama','$tempat_lahir','$tanggal_lahir','$alamat','$no_telepon','$tahun_angkatan','$username','$password','$gambar')";
 			$res=mysql_query($sql) or die (mysql_error());
         /** echo "Gambar berhasil dikirim ke direktori".$gambar;
 			echo "<p>User Id  : $user_id</p>";

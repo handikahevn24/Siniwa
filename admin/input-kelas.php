@@ -8,7 +8,24 @@ if (empty($_SESSION['username'])){
 <!DOCTYPE html>
 <html lang="en">
   
-  <?php include "head.php"; ?>
+  <?php include "head.php";
+
+  $query_kelas = mysql_query("SELECT * FROM kelas order by kode_kelas desc")or die(mysql_error()); 
+  $row_kelas = mysql_fetch_array($query_kelas);
+  $totalrow_kelas = mysql_num_rows($query_kelas);
+
+if ($totalrow_kelas > 0) {
+  $kodekelas_terakhir = substr($row_kelas['kode_kelas'], -3);
+  $nourut = $kodekelas_terakhir+1;
+  $isikodekelas ="K"."00".$nourut;
+  }else if ($totalrow_kelas ==0){
+  $nourut = 1;
+  $isikodekelas ="K"."00".$nourut;
+  
+  }
+
+
+  ?>
   <body>
 
   <section id="container" >
@@ -74,7 +91,7 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Kode Kelas</label>
                               <div class="col-sm-10">
-                                  <input name="kode_kelas" type="text" id="kode_kelas" class="form-control" placeholder="Isi dengan ex : K001 dst." autofocus="on" required="required" />
+                                  <input name="kode_kelas" type="text" id="kode_kelas" class="form-control" placeholder="Isi dengan ex : K001 dst." autofocus="on" required="required" value="<?php echo $isikodekelas;?> " readonly/>
                               </div>
                           </div>
                           <div class="form-group">
@@ -106,9 +123,18 @@ $_SESSION['start_time'] = time();
                               <div class="col-sm-10">
                                   <select name="nama_kelas" id="nama_kelas"  class="form-control" required />
                                     <option> ---- Pilih Salah Satu ---- </option>
-                                    <option value="Kelas A">Kelas A</option>
-                                    <option value="Kelas B">Kelas B</option>
-                                    <option value="Kelas C">Kelas C</option>
+                                    <option value="TKJ 1">TKJ 1</option>
+                                    <option value="TKJ 2">TKJ 2</option>
+                                    <option value="TKJ 3">TKJ 3</option>
+                                    <option value="BB 1">BB 1</option>
+                                    <option value="BB 2">BB 2</option>
+                                    <option value="BB 3">BB 3</option>
+                                    <option value="TOI 1">TOI 1</option>
+                                    <option value="TOI 2">TOI 2</option>
+                                    <option value="TOI 3">TOI 3</option>
+                                    <option value="TKR 1">TKR 1</option>
+                                    <option value="TKR 2">TKR 2</option>
+                                    <option value="TKR 3">TKR 3</option>
                                   </select>
                               </div>
                           </div>
@@ -128,16 +154,7 @@ $_SESSION['start_time'] = time();
                                   </select>
                               </div>
                           </div>       
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status Aktif</label>
-                              <div class="col-sm-10">
-                                    <select name="status_aktif" id="status_aktif" class="form-control" required />
-                                    <option> ---- Pilih Salah Satu ---- </option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                   </select>
-                              </div>
-                          </div>
+                          
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
@@ -151,7 +168,7 @@ $_SESSION['start_time'] = time();
           	</div><!-- /row -->
           	
           	
-		</section><! --/wrapper -->
+		</section><!--/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
@@ -199,6 +216,12 @@ $_SESSION['start_time'] = time();
           $('select.styled').customSelect();
       });
 
+
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function($) {
+   alert('Jquery Working');
+});
   </script>
   <script type="text/javascript" src="assets/tiny_mce/tiny_mce.js"></script>
 	<script type="text/javascript">

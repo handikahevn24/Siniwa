@@ -83,7 +83,6 @@ $_SESSION['start_time'] = time();
        <th>Kelas </th>
        <th>Nama Kelas </th>
        <th>Kode Guru </th>
-       <th>Status </th>
        <th>Tools</th>
 	  
       </tr>

@@ -21,12 +21,11 @@ $columns = array(
 	2 => 'nama_guru',
 	3 => 'kelamin',
     4 => 'alamat',
-    5 => 'no_telepon',
-    6 => 'status_aktif'
+    5 => 'no_telepon'
 );
 
 // getting total number records without any search
-$sql = "SELECT kode_guru, nip, nama_guru, kelamin, alamat, no_telepon, status_aktif";
+$sql = "SELECT kode_guru, nip, nama_guru, kelamin, alamat, no_telepon";
 $sql.=" FROM guru";
 $query=mysqli_query($conn, $sql) or die("ajax-data-guru.php: get Guru");
 $totalData = mysqli_num_rows($query);
@@ -35,7 +34,7 @@ $totalFiltered = $totalData;  // when there is no search parameter then total nu
 
 if( !empty($requestData['search']['value']) ) {
 	// if there is a search parameter
-	$sql = "SELECT kode_guru, nip, nama_guru, kelamin, alamat, no_telepon, status_aktif";
+	$sql = "SELECT kode_guru, nip, nama_guru, kelamin, alamat, no_telepon";
 	$sql.=" FROM guru";
 	$sql.=" WHERE kode_guru LIKE '".$requestData['search']['value']."%' ";    // $requestData['search']['value'] contains search parameter
 	$sql.=" OR nip LIKE '".$requestData['search']['value']."%' ";
@@ -43,7 +42,6 @@ if( !empty($requestData['search']['value']) ) {
     $sql.=" OR kelamin LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR alamat LIKE '".$requestData['search']['value']."%' ";
     $sql.=" OR no_telepon LIKE '".$requestData['search']['value']."%' ";
-    $sql.=" OR status_aktif LIKE '".$requestData['search']['value']."%' ";
 	$query=mysqli_query($conn, $sql) or die("ajax-data.php: get Guru");
 	$totalFiltered = mysqli_num_rows($query); // when there is a search parameter then we have to modify total number filtered rows as per search result without limit in the query 
 
@@ -52,7 +50,7 @@ if( !empty($requestData['search']['value']) ) {
 	
 } else {	
 
-	$sql = "SELECT kode_guru, nip, nama_guru, kelamin, alamat, no_telepon, status_aktif";
+	$sql = "SELECT kode_guru, nip, nama_guru, kelamin, alamat, no_telepon";
 	$sql.=" FROM guru";
 	$sql.=" ORDER BY ". $columns[$requestData['order'][0]['column']]."   ".$requestData['order'][0]['dir']."   LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
 	$query=mysqli_query($conn, $sql) or die("ajax-data-guru.php: get Guru");   
@@ -69,7 +67,6 @@ while( $row=mysqli_fetch_array($query) ) {  // preparing an array
 	$nestedData[] = $row["kelamin"];
     $nestedData[] = $row["alamat"];
     $nestedData[] = $row["no_telepon"];
-    $nestedData[] = $row["status_aktif"];
     $nestedData[] = '<td><center>
                      <a href="edit-guru.php?kd='.$row['kode_guru'].'"  data-toggle="tooltip" title="Edit" class="btn btn-sm btn-primary"> <i class="glyphicon glyphicon-edit"></i> </a>
 				     <a href="hapus-guru.php?kd='.$row['kode_guru'].'"  data-toggle="tooltip" title="Delete" onclick="return confirm(\'Anda yakin akan menghapus data '.$row['nama_guru'].'?\')" class="btn btn-sm btn-danger"> <i class="glyphicon glyphicon-trash"> </i> </a>

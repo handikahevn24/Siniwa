@@ -21,7 +21,7 @@ if (empty($username) && empty($password)) {
 	break;
 }
 
-$q = mysql_query("select * from siswa where nis='$username' and password='$password'");
+$q = mysql_query("select * from siswa where username='$username' and password='$password'");
 $row = mysql_fetch_array ($q);
 
 if (mysql_num_rows($q) == 1) {

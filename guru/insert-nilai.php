@@ -10,7 +10,16 @@ $nilai_tugas2   = $_POST['nilai_tugas2'];
 $nilai_tugas3   = $_POST['nilai_tugas3'];
 $nilai_uts      = $_POST['nilai_uts'];
 $nilai_uas      = $_POST['nilai_uas'];
-$keterangan     = $_POST['keterangan'];
+$total = $_POST['nilai_tugas1'] + $_POST['nilai_tugas2'] + $_POST['nilai_tugas3'] + $_POST['nilai_uts'] + $_POST['nilai_uas'];
+                                      $rata = $total / 5;
+if ($rata <=79) {
+	$keterangan = "Cukup";
+}else if ($rata <=89) {
+	$keterangan  = "Baik";
+}else if ($rata <=100) {
+	$keterangan = "Baik Sekali";
+}
+
 
 /**$sqlCek="SELECT * FROM kelas WHERE nama_kelas='$nama_kelas' AND tahun_ajar='$tahun_ajar'";
 	$qryCek=mysql_query($sqlCek) or die ("Eror Query".mysql_error()); 

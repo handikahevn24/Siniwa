@@ -28,7 +28,7 @@ if (mysql_num_rows($q) == 1) {
 	$_SESSION['username'] = $username;
 	$_SESSION['fullname'] = $row['fullname'];
     $_SESSION['gambar'] = $row['gambar'];	
-
+	
 	header('location:admin/index.php');
 } else {
 	echo "username atau password yang anda masukan salah";

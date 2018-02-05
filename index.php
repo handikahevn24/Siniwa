@@ -23,6 +23,11 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+      body {
+        background-image: url(bgsiswa.jpg);
+      }
+    </style>
   </head>
 
   <body>
@@ -73,7 +78,7 @@
     <script type="text/javascript" src="admin/assets/js/jquery.backstretch.min.js"></script>
     <!-- Pemanggilan Background Login Form-->
     <script>
-        $.backstretch("foto/3.jpg", {speed: 500});
+        $.backstretch("bgsiswa.jpg", {speed: 500});
     </script>
 
 

@@ -3,10 +3,8 @@ session_start();
 if (empty($_SESSION['username'])){
 	header('location:../login-guru.php');	
 } else {
-	include "../conn.php";
   $nama = $_SESSION['nama'];
-  $kode_pelajaran = $_SESSION['kode_pelajaran'];
-
+	include "../conn.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,9 +124,10 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Pelajaran</label>
                               <div class="col-sm-10">
-                                  <select name="kode_pelajaran" id="kode_pelajaran"  class="form-control" required readonly/>
+                                  <select name="kode_pelajaran" id="kode_pelajaran"  class="form-control" required />
+                                    <option> ---- Pilih Salah Satu ---- </option>
                                     <?php
-                                    $sql = mysql_query("SELECT DISTINCT pelajaran.nama_pelajaran, pelajaran.kode_pelajaran FROM guru,pelajaran  where pelajaran.kode_pelajaran = '$kode_pelajaran'");
+                                    $sql = mysql_query("SELECT * FROM pelajaran ORDER BY kode_pelajaran ASC");
                                     if(mysql_num_rows($sql) != 0){
                                     while($data = mysql_fetch_assoc($sql)){
                                     echo '<option value='.$data['kode_pelajaran'].'>'.$data['nama_pelajaran'].'</option>'; }
@@ -140,9 +139,10 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Guru Pengajar</label>
                               <div class="col-sm-10">
-                                  <select name="kode_guru" id="kode_guru"  class="form-control" required readonly/>
+                                  <select name="kode_guru" id="kode_guru"  class="form-control" required />
+                                    <option> ---- Pilih Salah Satu ---- </option>
                                     <?php
-                                    $sql = mysql_query("SELECT * FROM guru WHERE nama_guru = '$nama'");
+                                    $sql = mysql_query("SELECT * FROM guru ORDER BY kode_guru ASC");
                                     if(mysql_num_rows($sql) != 0){
                                     while($data = mysql_fetch_assoc($sql)){
                                     echo '<option value='.$data['kode_guru'].'>'.$data['nama_guru'].'</option>'; }
@@ -172,7 +172,16 @@ $_SESSION['start_time'] = time();
                               <label class="col-sm-2 col-sm-2 control-label">Nama Siswa</label>
                               <div class="col-sm-10">
                                   <select name="kode_siswa" id="kode_siswa"  class="form-control" required />
-                                    
+                                    <option> ---- Pilih Salah Satu ---- </option>
+                                    <?php
+                                    $sql = mysql_query("SELECT siswa.* FROM siswa, kelas_siswa 
+			                         WHERE siswa.kode_siswa = kelas_siswa.kode_siswa 
+			                         ORDER BY nama_siswa");
+                                    if(mysql_num_rows($sql) != 0){
+                                    while($data = mysql_fetch_assoc($sql)){
+                                    echo '<option value='.$data['kode_siswa'].'>'.$data['nis'].' - '.$data['nama_siswa'].'</option>'; }
+                                    }
+                                    ?>
                                   </select>
                               </div>
                           </div>
@@ -206,6 +215,12 @@ $_SESSION['start_time'] = time();
                               <label class="col-sm-2 col-sm-2 control-label"> Nilai UAS</label>
                               <div class="col-sm-10">
                                   <input type="text" name="nilai_uas" id="nilai_uas" placeholder="Nilai UAS" class="form-control" required="required" />
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label"> Keterangan</label>
+                              <div class="col-sm-10">
+                                  <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" required="required" />
                               </div>
                           </div>
                           <div class="form-group">
@@ -307,20 +322,6 @@ $_SESSION['start_time'] = time();
 	}
 	});
 	</script>
-  
-    </script>
-
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>       
-    <script type="text/javascript">
-    
-    $("#kode_kelas").on("change",function(){
-        var pilih_kelas = this.value;
-        var combobox_item = "http://seminar.dev/admin/ambilsiswa.php?kode_kelas="+pilih_kelas;
-        $("#kode_siswa").load(combobox_item);
-    })
-
-    </script>
 
   </body>
 </html>

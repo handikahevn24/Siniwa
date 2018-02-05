@@ -82,7 +82,7 @@ $_SESSION['start_time'] = time();
                         <div class="table-responsive">
                     <?php
                     $query1="SELECT kelas_siswa.id, kelas_siswa.kode_kelas, kelas_siswa.jurusan, kelas.tahun_ajar, kelas.kelas, kelas.nama_kelas, guru.nama_guru,
-                            siswa.nis, siswa.nama_siswa, siswa.tahun_angkatan, siswa.status
+                            siswa.nis, siswa.nama_siswa, siswa.tahun_angkatan
                             FROM kelas_siswa, kelas, guru, siswa
                             WHERE kelas_siswa.kode_kelas=kelas.kode_kelas AND
                             kelas.kode_guru=guru.kode_guru AND siswa.kode_siswa=kelas_siswa.kode_siswa";
@@ -108,7 +108,7 @@ $_SESSION['start_time'] = time();
                         <th>NIS <i class="fa fa-sort"></i></th>
                         <th>Nama Siswa <i class="fa fa-sort"></i></th>
                         <th>Tahun Angkatan</th>
-                        <th>Status Siswa <i class="fa fa-sort"></i></th>
+                        
                       </tr>
                      <?php while($data=mysql_fetch_array($tampil))
                     { ?>
@@ -123,7 +123,7 @@ $_SESSION['start_time'] = time();
                     <td><?php echo $data['nis'];?></td>
                      <td><?php echo $data['nama_siswa'];?></td>
                       <td><?php echo $data['tahun_angkatan'];?></td>
-                    <td><?php echo $data['status'];?></td>
+
                     <!--<td><center><a class="btn btn-sm btn-primary tooltips" data-placement="bottom" data-original-title="Edit Kelas" href="edit-kelas.php?hal=edit-admin&kd=<?php /**echo $data['kode_kelas'];**/?>"><span class="glyphicon glyphicon-edit"></span></a>
                         <hr /><a class="btn btn-sm btn-danger tooltips" data-placement="bottom" data-original-title="Hapus Kelas" href="hapus-kelas.php?hal=hapus&kd=<?php /**echo $data['kode_kelas'];**/?>" onclick="return confirm('Apakah anda akan menghapus <?php /**echo $data['kode_kelas'];**/ ?> ?');"><span class="glyphicon glyphicon-trash"></a></center></td></tr>-->
                  <?php   

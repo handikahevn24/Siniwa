@@ -5,6 +5,23 @@ $con=mysql_connect("localhost","root","") or die("Gagal");
 mysql_select_db("ecommerce")  or die("Gagal");*/
 include "../conn.php";
 
+$query_guru = mysql_query("SELECT * FROM guru order by kode_guru desc")or die(mysql_error());
+$row_guru = mysql_fetch_array($query_guru);
+$totalrow_guru = mysql_num_rows($query_guru);
+
+if ($totalrow_guru > 0) {
+  $kodeguru_terakhir = substr($row_guru['kode_guru'], -3);
+  $nourut = $kodeguru_terakhir+1;
+  $isikodeguru ="S"."00".$nourut;
+  }else if ($totalrow_guru ==0){
+  $nourut = 1;
+  $isikodeguru ="S"."00".$nourut;
+  
+  }
+
+
+
+
 if (!empty($_FILES["nama_file"]["tmp_name"]))
 {
 	$jenis_gambar=$_FILES['nama_file']['type'];
@@ -14,16 +31,23 @@ if (!empty($_FILES["nama_file"]["tmp_name"]))
         $kelamin=$_POST['kelamin'];
         $alamat=$_POST['alamat'];
         $no_telepon=$_POST['no_telepon'];
-        $status_aktif=$_POST['status_aktif'];
         $username=$_POST['username'];
         $password=$_POST['password'];
+        $pelajaran = $_POST['pelajaran'];
 		
 	if($jenis_gambar=="image/jpeg" || $jenis_gambar=="image/jpg" || $jenis_gambar=="image/gif" || $jenis_gambar=="image/x-png")
 	{			
 		$gambar = $namafolder . basename($_FILES['nama_file']['name']);		
 		if (move_uploaded_file($_FILES['nama_file']['tmp_name'], $gambar)) {
-			$sql="INSERT INTO guru(kode_guru,nip,nama_guru,kelamin,alamat,no_telepon,status_aktif,username,password,gambar) VALUES
-            ('$kode_guru','$nip','$nama_guru','$kelamin','$alamat','$no_telepon','$status_aktif','$username','$password','$gambar')";
+
+   # $ceknis = mysql_query("SELECT * FROM guru where nip=$nip")or die(mysql_error());
+   # if (mysql_num_rows($ceknis)>=1) {
+   #     echo "<script>alert('Nip tersebut sudah digunakan'); window.location = 'input-guru.php' </script>";
+   #     die();
+   # }
+
+			$sql="INSERT INTO guru(kode_guru,nip,nama_guru,kelamin,alamat,no_telepon,username,password,gambar,kode_pelajaran) VALUES
+            ('$kode_guru','$nip','$nama_guru','$kelamin','$alamat','$no_telepon','$username','$password','$gambar', '$pelajaran')";
 			$res=mysql_query($sql) or die (mysql_error());
 		/**	echo "Gambar berhasil dikirim ke direktori".$gambar;
 	       	echo "<p>User Id  : $user_id</p>";
@@ -31,7 +55,7 @@ if (!empty($_FILES["nama_file"]["tmp_name"]))
             echo "<p>Password : $password</p>";
             echo "<p>Fullname : $fullname</p>";
             echo "<p>Gambar   : $gambar</p>";**/
-            echo "<script>alert('Data berhasil dimasukan!'); window.location = 'siswa.php'</script>";	   
+            echo "<script>alert('Data berhasil dimasukan!'); window.location = 'guru.php'</script>";	   
 		} else {
 		   echo "<p>Gambar gagal dikirim</p>";
 		}

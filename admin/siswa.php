@@ -145,15 +145,6 @@ $_SESSION['start_time'] = time();
 	
 	<script src="assets/js/form-component.js"></script>    
     
-    
-  <!-- <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>-->
 <script>
         $(document).ready(function() {
 				var dataTable = $('#lookup').DataTable( {

@@ -138,44 +138,33 @@ $_SESSION['start_time'] = time();
                     
                     $tampil=mysql_query("SELECT siswa.kode_siswa, siswa.nis, siswa.nama_siswa,
                                         nilai.semester, pelajaran.nama_pelajaran,
-                                        nilai.nilai_tugas1, nilai.nilai_tugas2, nilai.nilai_tugas3,nilai.keterangan,
-                                        nilai.nilai_uts, nilai.nilai_uas, kelas_siswa.jurusan
-                                        FROM siswa, nilai, pelajaran, kelas_siswa
-                                        WHERE siswa.kode_siswa=nilai.kode_siswa AND
-                                        nilai.kode_pelajaran=pelajaran.kode_pelajaran AND 
-                                        kelas_siswa.kode_siswa=siswa.kode_siswa AND
-                                        siswa.kode_siswa='$siswa'") or die(mysql_error());
-
-
-                    $dd=mysql_query("SELECT siswa.kode_siswa, siswa.nis, siswa.nama_siswa,
-                                        nilai.semester, pelajaran.nama_pelajaran,
                                         nilai.nilai_tugas1, nilai.nilai_tugas2, nilai.nilai_tugas3,
-                                        nilai.nilai_uts, nilai.nilai_uas, kelas_siswa.jurusan
+                                        nilai.nilai_uts, nilai.nilai_uas, nilai.keterangan, kelas_siswa.jurusan
                                         FROM siswa, nilai, pelajaran, kelas_siswa
                                         WHERE siswa.kode_siswa=nilai.kode_siswa AND
                                         nilai.kode_pelajaran=pelajaran.kode_pelajaran AND 
                                         kelas_siswa.kode_siswa=siswa.kode_siswa AND
                                         siswa.kode_siswa='$siswa'") or die(mysql_error());
-                    $d = mysql_fetch_array($dd);
                     ?>
-                    
+                    <?php while($data=mysql_fetch_array($tampil))
+                    { ?>
                     <table width="500">
                     <tr>
-                        <td width="100">Kode Siswa</td> <td>:</td> <td><?php echo $d['kode_siswa']; ?></td> 
+                        <td width="100">Kode Siswa</td> <td>:</td> <td><?php echo $data['kode_siswa']; ?></td> 
                     </tr>
                     <br />
                     <tr>
-                        <td width="100">Nis</td> <td>:</td> <td><?php echo $d['nis']; ?></td>
+                        <td width="100">Nis</td> <td>:</td> <td><?php echo $data['nis']; ?></td>
                     </tr>
                     <br />
                     <tr>
-                        <td width="100">Nama Siswa</td> <td>:</td> <td><?php echo $d['nama_siswa']; ?></td>
+                        <td width="100">Nama Siswa</td> <td>:</td> <td><?php echo $data['nama_siswa']; ?></td>
                     </tr>
                     <tr>
-                        <td width="100">Jurusan</td> <td>:</td> <td><?php echo $d['jurusan']; ?></td>
+                        <td width="100">Jurusan</td> <td>:</td> <td><?php echo $data['jurusan']; ?></td>
                     </tr>
                     <tr>
-                        <td width="100">Semester</td> <td>:</td> <td><?php echo $d['semester']; ?></td>
+                        <td width="100">Semester</td> <td>:</td> <td><?php echo $data['semester']; ?></td>
                     </tr>
                     </table><br />
                   <div class="table-responsive">
@@ -188,11 +177,9 @@ $_SESSION['start_time'] = time();
                         <th><center>UAS</center></th>
                         <th><center>Total Nilai</center></th>
                         <th><center>Nilai Rata - Rata</center></th>
-                        <th><center>Keterangan</center></th>
                         
                       </tr>
-                    <?php while($data=mysql_fetch_array($tampil))
-                    { ?> 
+                     
                     <tr>
                     <td><?php echo $data['nama_pelajaran']; ?></a></td>
                     <td><center><?php echo $data['nilai_tugas1']; ?></center></td>
@@ -204,12 +191,14 @@ $_SESSION['start_time'] = time();
                                       $rata = $total / 5; 
                                       echo $total; ?></center></td>
                     <td><center><?php echo $rata;?></center></td>
-                    <td><center><?php echo $data['keterangan'];?></center></td>
                     </tr>
-                                       
+                    <tr>
+                    <td>Keterangan</td>
+                    <td colspan="7"><strong><?php echo $data['keterangan']; ?></strong></td>
+                    </tr>
+                    </table>
                     <?php }
                     ?>
-                    </table>
                 <div class="text-right">
                   <a class="btn btn-sm btn-warning tooltips" data-placement="bottom" data-original-title="Print Nilai" href="cetak.php"><span class="glyphicon glyphicon-print"></span></a>
                   </div>

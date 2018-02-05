@@ -36,7 +36,6 @@ while($row = mysql_fetch_array($result))
     $nama = $row["kelas"];
     $kelamin = $row["nama_kelas"];
     $agama = $row["nama_guru"];
-	$tempat = $row["status_aktif"];
     /**$tanggal = $row["tanggal_lahir"];
     $alamat = $row["alamat"];
     $telepon = $row["no_telepon"];
@@ -49,7 +48,6 @@ while($row = mysql_fetch_array($result))
     $column_nama = $column_nama.$nama."\n";
     $column_kelamin = $column_kelamin.$kelamin."\n";
     $column_agama = $column_agama.$agama."\n";
-    $column_tempat = $column_tempat.$tempat."\n";
     /**$column_tanggal = $column_tanggal.$tanggal."\n";
     $column_alamat = $column_alamat.$alamat."\n";
     $column_telepon = $column_telepon.$telepon."\n";
@@ -92,8 +90,6 @@ $pdf->SetX(75);
 $pdf->Cell(25,8,'Nama Kelas',1,0,'C',1);
 $pdf->SetX(100);
 $pdf->Cell(70,8,'Walikelas',1,0,'C',1);
-$pdf->SetX(170);
-$pdf->Cell(35,8,'Status',1,0,'C',1);
 $pdf->Ln();
 
 //Table position, under Fields Name
@@ -122,9 +118,6 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(100);
 $pdf->MultiCell(70,6,$column_agama,1,'L');
 
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(170);
-$pdf->MultiCell(35,6,$column_tempat,1,'C');
 
 //Footer Table 
 /**$pdf->SetFillColor(110,180,230);

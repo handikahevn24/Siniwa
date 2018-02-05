@@ -62,13 +62,13 @@ $_SESSION['start_time'] = time();
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Nilai &raquo; Input Nilai Siswa</h3>
+          	<h3><i class="fa fa-angle-right"></i> Nilai &raquo; Input Nilai Siswa </h3>
           	
           	<!-- BASIC FORM ELELEMNTS -->
           	<div class="row mt">
           		<div class="col-lg-12">
                   <div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Data Pelajaran</h4>
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Data Pelajaran </h4>
                       <form class="form-horizontal style-form" action="insert-nilai.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Semester</label>
@@ -77,21 +77,6 @@ $_SESSION['start_time'] = time();
                                     <option value="kosong (semester tidak di pilih)"> ---- Pilih Salah Satu ---- </option>
                                     <option value="1">1 - Ganjil</option>
                                     <option value="2">2 - Genap</option>
-                                  </select>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Pelajaran</label>
-                              <div class="col-sm-10">
-                                  <select name="kode_pelajaran" id="kode_pelajaran"  class="form-control" required />
-                                    <option> ---- Pilih Salah Satu ---- </option>
-                                    <?php
-                                    $sql = mysql_query("SELECT * FROM pelajaran ORDER BY kode_pelajaran ASC");
-                                    if(mysql_num_rows($sql) != 0){
-                                    while($data = mysql_fetch_assoc($sql)){
-                                    echo '<option value='.$data['kode_pelajaran'].'>'.$data['nama_pelajaran'].'</option>'; }
-                                    }
-                                    ?>
                                   </select>
                               </div>
                           </div>
@@ -105,6 +90,22 @@ $_SESSION['start_time'] = time();
                                     if(mysql_num_rows($sql) != 0){
                                     while($data = mysql_fetch_assoc($sql)){
                                     echo '<option value='.$data['kode_guru'].'>'.$data['nama_guru'].'</option>'; }
+                                    }
+                                    ?>
+                                  </select>
+                              </div>
+                          </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Pelajaran</label>
+                              <div class="col-sm-10">
+                                  <select name="kode_pelajaran" id="kode_pelajaran"  class="form-control" required />
+                                    <option> ---- Pilih Salah Satu ---- </option>
+                                    <?php
+                                    $sql = mysql_query("SELECT * FROM pelajaran ORDER BY kode_pelajaran ASC");
+                                    if(mysql_num_rows($sql) != 0){
+                                    while($data = mysql_fetch_assoc($sql)){
+                                    echo '<option value='.$data['kode_pelajaran'].'>'.$data['nama_pelajaran'].'</option>'; }
                                     }
                                     ?>
                                   </select>
@@ -131,16 +132,9 @@ $_SESSION['start_time'] = time();
                               <label class="col-sm-2 col-sm-2 control-label">Nama Siswa</label>
                               <div class="col-sm-10">
                                   <select name="kode_siswa" id="kode_siswa"  class="form-control" required />
-                                    <option> ---- Pilih Salah Satu ---- </option>
-                                    <?php
-                                    $sql = mysql_query("SELECT siswa.* FROM siswa, kelas_siswa 
-			                         WHERE siswa.kode_siswa = kelas_siswa.kode_siswa 
-			                         ORDER BY nama_siswa");
-                                    if(mysql_num_rows($sql) != 0){
-                                    while($data = mysql_fetch_assoc($sql)){
-                                    echo '<option value='.$data['kode_siswa'].'>'.$data['nis'].' - '.$data['nama_siswa'].'</option>'; }
-                                    }
-                                    ?>
+                                  <option> ---- Pilih Salah Satu ---- </option>
+                                   
+                                   
                                   </select>
                               </div>
                           </div>
@@ -173,12 +167,6 @@ $_SESSION['start_time'] = time();
                               <label class="col-sm-2 col-sm-2 control-label"> Nilai UAS</label>
                               <div class="col-sm-10">
                                   <input type="text" name="nilai_uas" id="nilai_uas" placeholder="Nilai UAS" class="form-control" required="required" />
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label"> Keterangan</label>
-                              <div class="col-sm-10">
-                                  <input type="text" name="keterangan" id="keterangan" placeholder="Keterangan" class="form-control" required="required" />
                               </div>
                           </div>
                           <div class="form-group">
@@ -272,7 +260,28 @@ $_SESSION['start_time'] = time();
 		staffid : "991234"
 	}
 	});
+
 	</script>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>       
+    <script type="text/javascript">
+    
+    $("#kode_kelas").on("change",function(){
+        var pilih_kelas = this.value;
+        var combobox_item = "http://seminar.dev/admin/ambilsiswa.php?kode_kelas="+pilih_kelas;
+        $("#kode_siswa").load(combobox_item);
+    })
+
+    $("#kode_guru").on("change",function(){
+        var pilih_guru = this.value;
+        var combobox_item2 = "http://seminar.dev/admin/ambilsiswa.php?kode_guru="+pilih_guru;
+        $("#kode_pelajaran").load(combobox_item2);
+    })
+
+
+
+    </script>
 
   </body>
 </html>

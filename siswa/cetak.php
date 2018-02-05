@@ -14,7 +14,7 @@ $siswa = $_SESSION['kode'];
                     
 $result=mysql_query("SELECT siswa.kode_siswa, siswa.nis, siswa.nama_siswa,
                                         nilai.semester, pelajaran.nama_pelajaran, pelajaran.kkm,
-                                        nilai.nilai_tugas1, nilai.nilai_tugas2,
+                                        nilai.nilai_tugas1, nilai.nilai_tugas2, nilai.nilai_tugas3,
                                         nilai.nilai_uts, nilai.nilai_uas, nilai.keterangan,
                                         kelas_siswa.jurusan, kelas.tahun_ajar, kelas.kelas
                                         FROM siswa, nilai, pelajaran, kelas, kelas_siswa
@@ -50,7 +50,9 @@ while($row = mysql_fetch_array($result))
     $kelas = $row["kelas"];
     $tahun = $row["tahun_ajar"];
     $ket = $row["keterangan"];
-    $nilai = $row["nilai_uas"];
+    $total = $row['nilai_tugas1'] + $row['nilai_tugas2'] + $row['nilai_tugas3'] + $row['nilai_uts'] + $row['nilai_uas'];
+    $nilai = $total / 5;
+    //$nilai = $row["nilai_uas"];
     $rata = $row["keterangan"];	
 
 	$column_date = $column_date.$date."\n";

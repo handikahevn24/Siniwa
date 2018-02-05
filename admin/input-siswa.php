@@ -7,7 +7,23 @@ if (empty($_SESSION['username'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
- <?php include "head.php"; ?>
+ <?php include "head.php"; 
+$query_siswa = mysql_query("SELECT * FROM siswa order by kode_siswa desc")or die(mysql_error());
+$row_siswa = mysql_fetch_array($query_siswa);
+$totalrow_siswa = mysql_num_rows($query_siswa);
+ 
+if ($totalrow_siswa > 0) {
+  $kodesiswa_terakhir = substr($row_siswa['kode_siswa'], -3);
+  $nourut = $kodesiswa_terakhir+1;
+  $isikodesiswa ="S"."00".$nourut;
+  }else if ($totalrow_siswa ==0){
+  $nourut = 1;
+  $isikodesiswa ="S"."00".$nourut;
+  
+  }
+
+
+ ?>
 
   <body>
 
@@ -74,7 +90,7 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Kode Siswa</label>
                               <div class="col-sm-10">
-                                  <input name="kode_siswa" type="text" id="kode_siswa" class="form-control" placeholder="Isi dengan ex : S0001 dst." autofocus="on" />
+                                  <input name="kode_siswa" type="text" id="kode_siswa" class="form-control"  autofocus="on" value="<?php echo $isikodesiswa;?>" readonly />
                               </div>
                           </div>
                           <div class="form-group">
@@ -124,7 +140,7 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Tanggal Lahir</label>
                               <div class="col-sm-10">
-                                  <input name="tanggal_lahir" class="form-control" id="tanggal_lahir" type="text" placeholder="Tanggal Lahir" required />
+                                  <input name="tanggal_lahir" class="form-control" id="tanggal_lahir" type="date" placeholder="Tanggal Lahir" required />
 
                               </div>
                           </div>
@@ -151,18 +167,6 @@ $_SESSION['start_time'] = time();
                                     <option value="2017/2018">2017/2018</option>
                                     <option value="2018/2019">2018/2019</option>
                                     <option value="2019/2020">2019/2020</option>
-                                  </select>
-
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status</label>
-                              <div class="col-sm-10">
-                                  <select name="status" id="status"  class="form-control" required />
-                                    <option> ---- Pilih Salah Satu ---- </option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Lulus">Lulus</option>
-                                    <option value="Keluar">Keluar</option>
                                   </select>
 
                               </div>

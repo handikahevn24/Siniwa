@@ -78,7 +78,7 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Kode Siswa</label>
                               <div class="col-sm-10">
-                                  <input name="kode_siswa" type="text" id="kode_siswa" class="form-control" value="<?php echo $data['kode_siswa'];?>" autofocus="on" />
+                                  <input name="kode_siswa" type="text" id="kode_siswa" class="form-control" value="<?php echo $data['kode_siswa'];?>" autofocus="on" readonly/>
                               </div>
                           </div>
                           <div class="form-group">

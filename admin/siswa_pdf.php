@@ -24,7 +24,7 @@ $column_tanggal = "";
 $column_alamat = "";
 $column_telepon = "";
 $column_tahun = "";
-$column_status = "";
+
 
 //For each row, add the field to the corresponding column
 while($row = mysql_fetch_array($result))
@@ -39,7 +39,7 @@ while($row = mysql_fetch_array($result))
     $alamat = $row["alamat"];
     $telepon = $row["no_telepon"];
     $tahun = $row["tahun_angkatan"];
-    $status = $row["status"];
+
     
 
 	$column_kode_siswa = $column_kode_siswa.$kode."\n";
@@ -52,7 +52,7 @@ while($row = mysql_fetch_array($result))
     $column_alamat = $column_alamat.$alamat."\n";
     $column_telepon = $column_telepon.$telepon."\n";
     $column_tahun = $column_tahun.$tahun."\n";
-    $column_status = $column_status.$status."\n";
+
 			
 //mysql_close();
 
@@ -67,7 +67,7 @@ $pdf->Cell(150);
 $pdf->Cell(30,10,'DATA SISWA',0,0,'C');
 $pdf->Ln();
 $pdf->Cell(150);
-$pdf->Cell(30,10,'Sistem Informasi Nilai Siswa (SiNiS)',0,0,'C');
+$pdf->Cell(30,10,'Sistem Informasi Nilai Siswa (SINIWA)',0,0,'C');
 $pdf->Ln();
 
 }
@@ -98,8 +98,6 @@ $pdf->SetX(190);
 $pdf->Cell(100,8,'Alamat',1,0,'C',1);
 $pdf->SetX(290);
 $pdf->Cell(20,8,'T.A',1,0,'C',1);
-$pdf->SetX(310);
-$pdf->Cell(35,8,'Status',1,0,'C',1);
 $pdf->Ln();
 
 //Table position, under Fields Name
@@ -144,9 +142,7 @@ $pdf->SetY($Y_Table_Position);
 $pdf->SetX(290);
 $pdf->MultiCell(20,6,$column_tahun,1,'C');
 
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(310);
-$pdf->MultiCell(35,6,$column_status,1,'C');
+
 //Footer Table 
 /**$pdf->SetFillColor(110,180,230);
 $pdf->SetFont('Arial','B',12);

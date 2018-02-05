@@ -71,10 +71,10 @@ $pdf->SetY($Y_Fields_Name_position);
 $pdf->SetX(5);
 $pdf->Cell(20,8,'Kode',1,0,'C',1);
 $pdf->SetX(25);
-$pdf->Cell(25,8,'NIP',1,0,'C',1);
-$pdf->SetX(50);
-$pdf->Cell(40,8,'Nama',1,0,'C',1);
-$pdf->SetX(90);
+$pdf->Cell(30,8,'NIP',1,0,'C',1);
+$pdf->SetX(55);
+$pdf->Cell(45,8,'Nama',1,0,'C',1);
+$pdf->SetX(95);
 $pdf->Cell(25,8,'Kelamin',1,0,'C',1);
 $pdf->SetX(115);
 $pdf->Cell(110,8,'Alamat',1,0,'C',1);
@@ -88,7 +88,7 @@ $pdf->Ln();
 $Y_Table_Position = 38;
 
 //Now show the columns
-$pdf->SetFont('Arial','',10);
+$pdf->SetFont('Arial','',7);
 
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(5);
@@ -96,15 +96,15 @@ $pdf->MultiCell(20,6,$column_kode_siswa,1,'C');
 
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(25);
-$pdf->MultiCell(25,6,$column_nis,1,'C');
+$pdf->MultiCell(30,6,$column_nis,1,'C');
 
 $pdf->SetY($Y_Table_Position);
-$pdf->SetX(50);
+$pdf->SetX(55);
 $pdf->MultiCell(40,6,$column_nama,1,'L');
 
 $pdf->SetY($Y_Table_Position);
-$pdf->SetX(90);
-$pdf->MultiCell(25,6,$column_kelamin,1,'C');
+$pdf->SetX(95);
+$pdf->MultiCell(20,6,$column_kelamin,1,'C');
 
 $pdf->SetY($Y_Table_Position);
 $pdf->SetX(115);

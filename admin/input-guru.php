@@ -7,7 +7,23 @@ if (empty($_SESSION['username'])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
- <?php include "head.php"; ?>
+ <?php include "head.php"; 
+
+$query_guru = mysql_query("SELECT * FROM guru order by kode_guru desc")or die(mysql_error());
+$row_guru = mysql_fetch_array($query_guru);
+$totalrow_guru = mysql_num_rows($query_guru);
+
+if ($totalrow_guru > 0) {
+  $kodeguru_terakhir = substr($row_guru['kode_guru'], -3);
+  $nourut = $kodeguru_terakhir+1;
+  $isikodeguru ="G"."00".$nourut;
+  }else if ($totalrow_guru ==0){
+  $nourut = 1;
+  $isikodeguru ="G"."00".$nourut;
+  
+  }
+
+ ?>
 
   <body>
 
@@ -74,7 +90,7 @@ $_SESSION['start_time'] = time();
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Kode Guru</label>
                               <div class="col-sm-10">
-                                  <input name="kode_guru" type="text" id="kode_guru" class="form-control" placeholder="Isi dengan ex : G0001 dst." autofocus="on" />
+                                  <input name="kode_guru" type="text" id="kode_guru" class="form-control" placeholder="Isi dengan ex : G0001 dst." autofocus="on" value="<?php echo $isikodeguru;?>" readonly />
                               </div>
                           </div>
                           <div class="form-group">
@@ -91,7 +107,7 @@ $_SESSION['start_time'] = time();
                               </div>
                           </div>
                           <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Kelamin</label>
+                              <label class="col-sm-2 col-sm-2 control-label">Jenis Kelamin</label>
                               <div class="col-sm-10">
                                   <select name="kelamin" id="kelamin"  class="form-control" required />
                                     <option> ---- Pilih Salah Satu ---- </option>
@@ -101,6 +117,24 @@ $_SESSION['start_time'] = time();
 
                               </div>
                           </div>
+
+                          <div class="form-group">
+                              <label class="col-sm-2 col-sm-2 control-label">Pelajaran</label>
+                              <div class="col-sm-10">
+                                  <select name="pelajaran" id="pelajaran"  class="form-control" required />
+                                    <option> ---- Pilih Salah Satu ---- </option>
+                                    <?php
+                                    $sql = mysql_query("SELECT * FROM pelajaran order by nama_pelajaran asc ");
+                                    if(mysql_num_rows($sql) != 0){
+                                    while($data = mysql_fetch_assoc($sql)){
+                                    echo '<option value='.$data['kode_pelajaran'].'>'.$data['nama_pelajaran'].'</option>'; }
+                                    }
+                                    ?>
+                                  </select>
+
+                              </div>
+                          </div>
+
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label">Alamat</label>
                               <div class="col-sm-10">
@@ -112,17 +146,6 @@ $_SESSION['start_time'] = time();
                               <label class="col-sm-2 col-sm-2 control-label">No Telepon</label>
                               <div class="col-sm-10">
                                   <input name="no_telepon" class="form-control" id="no_telepon" type="text" placeholder="No Telepon" required />
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-sm-2 col-sm-2 control-label">Status Aktif</label>
-                              <div class="col-sm-10">
-                                  <select name="status_aktif" id="status_aktif"  class="form-control" required />
-                                    <option> ---- Pilih Salah Satu ---- </option>
-                                    <option value="Aktif">Aktif</option>
-                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                  </select>
-
                               </div>
                           </div>
                           <div class="form-group">

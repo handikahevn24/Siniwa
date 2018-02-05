@@ -28,7 +28,8 @@ if (mysql_num_rows($q) == 1) {
 	$_SESSION['username'] = $username;
 	$_SESSION['nama'] = $row['nama_guru'];
     $_SESSION['kode'] = $row['kode_guru'];
-    $_SESSION['gambar'] = $row['gambar'];	
+    $_SESSION['gambar'] = $row['gambar'];
+    $_SESSION['kode_pelajaran'] = $row['kode_pelajaran'];	
 
 	header('location:guru/nilai.php');
 } else {
